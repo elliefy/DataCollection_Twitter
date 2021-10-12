@@ -6,6 +6,7 @@ library(dplyr)
 library(ggplot2)
 library(tidytext)
 library(httpuv)
+
 </code></pre>
 
 Setting up your rtweet token
@@ -13,20 +14,23 @@ Setting up your rtweet token
 1 - You need to get your token from [Twitter API first](https://developer.twitter.com/en/docs/twitter-api/getting-started/getting-access-to-the-twitter-api).
 
 2 - Use the own token
-<pre class="r"><code>token <- create_token(
-  app = "Yourname_twitter_app",
-  consumer_key = "Your token",
-  consumer_secret = "Your token information")</code></pre>
+<pre class="r"><code>
+Stoken <- create_token(
+  app = "your twitter name",
+  consumer_key = "your token",
+  consumer_secret = "your token")</code></pre>
 
 Searching for Tweets
 ----------------
-<pre class="r"><code>rstats_tweets <- search_tweets(q = "#Covid",
+<pre class="r"><code>rstats_tweets <- search_tweets(q = "#COVID",
                                n = 200) #max 18,000 every 15 minutes
-                     head(rstats_tweets, n = 2) #looks at the top 2 tweets
-                     colnames(rstats_tweets) # check column names
                                </code></pre>
+                               
+Output to a dataframe
+rawtweets <- as.data.frame (rstats_tweets)
+write.rawtweets(df, file='rawtweets.csv')
 
-Scrape from a Timeline
+Search for users
 ----------------
 Code Source: https://rtweet.info/
 
@@ -67,40 +71,6 @@ users %>%
       labs(x = "Count",
       y = "Location",
       title = "Where Twitter users are from - unique locations ")</code></pre>
-
-Scrape time
-----------------
-<p>Use similar methods to scrape the time for all the articles. We create another function timeScraper, and apply it to the html content.</p>
-<pre class="r"><code>timeScraper <- function(x) {
-  timestampHold <- as.character(html_text(html_nodes(x, ".submitted-date"))) %>% str_replace_all("[\n]", "")
-  matrix(unlist(timestampHold))
-  timestampHold[1]} 
-timestamp <- lapply(xml, timeScraper) #list of timestamps
-head(timestamp)</code></pre>
-
-Output as a dataframe
-----------------
-<p>Create a dataframe for the text and time we scraped above</p>
-<pre class="r"><code>articleDF <- data.frame(storyID = as.character(storyURL[,1]), 
-                        headline = as.character(storyURL[,3]), 
-                        matrix(unlist(articleText), nrow = num), 
-                        matrix(unlist(timestamp), nrow = num), 
-                        themes = as.character(storyURL[,7]))
-names(articleDF)[3] <- 'text'
-names(articleDF)[4] <- 'time'
-#review the output
-#articleDF[1: 2, ]
-write.csv(articleDF, file = "TheHill_TrumpCovid_text.csv")</code></pre>
-
-Further readings
-----------------
-The official documentation for the package [`rvest`](https://cran.r-project.org/web/packages/rvest/rvest.pdf)
-
-[Simple web scraping for R in Github](https://github.com/tidyverse/rvest);
-
-[RStudio Blog: rvest: easy web scraping with R] (https://blog.rstudio.com/2014/11/24/rvest-easy-web-scraping-with-r/);
-
-Real-world applications: [Most popular films](https://www.analyticsvidhya.com/blog/2017/03/beginners-guide-on-web-scraping-in-r-using-rvest-with-hands-on-knowledge/), [Trip Advisor Reviews](https://www.johnlittle.info/project/custom/rfun-scrape/rvest_demo.nb.html), [IMDb pages](https://stat4701.github.io/edav/2015/04/02/rvest_tutorial/).
 
 
 
