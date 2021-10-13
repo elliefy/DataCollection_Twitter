@@ -53,6 +53,8 @@ tmls %>%
     title = "Frequency of Twitter statuses posted by Michelle Wu and KamalaHarris",
     subtitle = "Twitter status (tweet) counts aggregated by day from Jan 1 to Oct 12, 2021",
     caption = "\nSource: Data collected from Twitter's REST API via rtweet")</code></pre>
+
+<p align="center"><img src="frequency.png" width="650px"/></p>
     
 Plot for displaying locations of the users you have searched for
 ----------------
@@ -70,7 +72,7 @@ users %>%
   labs(x = "Count",
        y = "Location",
        title = "Where Twitter users are from - unique locations ")</code></pre>
-
+<p align="center"><img src="location.png" width="650px"/></p>
 
 
 
