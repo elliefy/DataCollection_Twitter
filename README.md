@@ -1,11 +1,8 @@
 Preparation - Install packages
 ----------------
-<pre class="r"><code>knitr::opts_chunk$set(echo = TRUE)
-library(rtweet)
-library(dplyr)
-library(ggplot2)
-library(tidytext)
-library(httpuv)
+<pre class="r"><code>
+install.packages("twitteR") #installs TwitteR 
+library (twitteR)#loads TwitteR
 
 </code></pre>
 
@@ -13,22 +10,22 @@ Setting up your rtweet token
 ----------------
 1 - You need to get your token from [Twitter API first](https://developer.twitter.com/en/docs/twitter-api/getting-started/getting-access-to-the-twitter-api).
 
-2 - Use the own token
-<pre class="r"><code>
-Stoken <- create_token(
-  app = "your twitter name",
-  consumer_key = "your token",
-  consumer_secret = "your token")</code></pre>
+2 - Use your information to set up the querying request<pre class="r"><code>api_key <- "your api key" 
+api_secret <- "your api_secret"
+token <- "your token" 
+token_secret <- "your token secret"
+setup_twitter_oauth(api_key, api_secret, token, token_secret)
+</code></pre>
 
 Searching for Tweets
 ----------------
-<pre class="r"><code>rstats_tweets <- search_tweets(q = "#COVID",
-                               n = 200) #max 18,000 every 15 minutes
-                               </code></pre>
+<pre class="r"><code>tweets <- searchTwitter("#COVID OR #community", n = 200, lang = "en")
+                    # search recent 200 tweets containg #COVID or #community</code></pre>
                                
 Output to a dataframe
-rawtweets <- as.data.frame (rstats_tweets)
-write.rawtweets(df, file='rawtweets.csv')
+----------------
+<pre class="r"><code>tweets.df <-twListToDF(tweets)
+write.csv(tweets.df, "tweets.csv")</code></pre>
 
 Search for users
 ----------------
