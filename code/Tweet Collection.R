@@ -1,4 +1,5 @@
-install.packages("twitteR") #installs TwitteR library (twitteR) #loads TwitteR
+install.packages("twitteR") #installs TwitteR library (twitteR) 
+#loads TwitteR
 library (twitteR)
 library(rtweet)
 library(dplyr)
