@@ -7,10 +7,10 @@ library(tidytext)
 library(httpuv)
 
 #Setting up your tweet token
-api_key <- "kXC80vG3hco9Uqt5pmboFNKAJ" 
-api_secret <- "IFqmI9aq4WYW6vKFDuvjIpeaaOTLt6JbioxSvPwBbXtyWqVMKr"#in the quotes, put your API key api_secret <- "" #in the quotes, put your API secret token token 
-token <- "4448195114-lGgF6hlfisi6issewhDqBFcebFv9GPGKTknZAaI" 
-token_secret <- "RA7IjUlW1X41dEXDj6Bec0VEHalgwiBBLwGMFOxxKeVFe"
+api_key <- "your api key" 
+api_secret <- "your api key" 
+token <- "your api token" 
+token_secret <- "your api token"
 setup_twitter_oauth(api_key, api_secret, token, token_secret)
 
 #Searching for Tweets
